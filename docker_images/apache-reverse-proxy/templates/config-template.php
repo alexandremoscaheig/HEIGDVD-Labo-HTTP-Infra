@@ -1,16 +1,32 @@
 <?php
-	$staticApp = getenv('STATIC_APP');
-	$dynamicApp = getenv('DYNAMIC_APP');
+	$staticApp = explode(',', getenv('STATIC_APP'));
+	$dynamicApp = explode(',', getenv('DYNAMIC_APP'));
 ?>
 
 <VirtualHost *:80>
 	ServerName demo.res.ch
 
-	ProxyPass "/api/animals/" "http://<?php print $dynamicApp ?>"
-	ProxyPassReverse "/api/animals/" "http://<?php print $dynamicApp ?>"
+	<Proxy "balancer://dynamicCluster">
+		<?php
+			foreach($staticApp as $ip) {
+				print "BalancerMember '$ip'";
+			}
+		?>
+	</Proxy>
 
-	ProxyPass "/" "http://<?php print $staticApp ?>"
-	ProxyPassReverse "/" "http://<?php print $staticApp ?>"
+	<Proxy "balancer://staticCluster">
+		<?php
+			foreach($staticApp as $ip) {
+				print "BalancerMember '$ip'";
+			}
+		?>
+	</Proxy>
+
+	ProxyPass "/api/animals/" "balancer://dynamicCluster"
+	ProxyPassReverse "/api/animals/" "balancer://dynamicCluster"
+
+	ProxyPass "/" "balancer://staticCluster"
+	ProxyPassReverse "/" "balancer://staticCluster"
 
 
 </VirtualHost>
