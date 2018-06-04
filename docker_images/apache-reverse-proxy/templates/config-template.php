@@ -28,5 +28,10 @@
 	ProxyPass "/" "balancer://staticCluster"
 	ProxyPassReverse "/" "balancer://staticCluster"
 
+	<Location "/balancer-manager">
+		SetHandler balancer-manager
+		Require host demo.res.ch
+	</Location>
+
 
 </VirtualHost>
