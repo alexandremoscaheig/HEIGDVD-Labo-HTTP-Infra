@@ -9,7 +9,7 @@
 	<Proxy "balancer://dynamicCluster">
 		<?php
 			foreach($staticApp as $ip) {
-				print "BalancerMember '$ip'";
+				print "BalancerMember '$ip'\r\n";
 			}
 		?>
 	</Proxy>
@@ -17,7 +17,7 @@
 	<Proxy "balancer://staticCluster">
 		<?php
 			foreach($staticApp as $ip) {
-				print "BalancerMember '$ip'";
+				print "BalancerMember '$ip'\r\n";
 			}
 		?>
 	</Proxy>
