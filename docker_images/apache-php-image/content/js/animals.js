@@ -4,7 +4,7 @@ $(function(){
 		console.log(animals);
 		var message = "No animals here";
 		if(animals.length > 0) {
-			message = animals[0].type + " " + animals[0].color;
+			message = animals[0].type + " " + animals[0].color + " " + animals[0].ip;
 		}
 		$(".skills").text(message);
 	});

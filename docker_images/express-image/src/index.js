@@ -1,8 +1,9 @@
 var Chance = require("chance");
 var chance = new Chance();
 
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+const ip = require('ip');
 
 function generateAnimals(){
 	var nbr = chance.integer({
@@ -25,7 +26,8 @@ function generateAnimals(){
 			birthday : chance.integer({
 				min:1,
 				max:20
-			})
+			}),
+			ip : ip.address()
 		});
 	};
 
@@ -34,7 +36,8 @@ function generateAnimals(){
 
 app.get('/', function (req, res) {
   res.send(generateAnimals());
-})
+});
+
 
 app.listen(3000, function () {
   console.log('Accepting request on port 3000!')

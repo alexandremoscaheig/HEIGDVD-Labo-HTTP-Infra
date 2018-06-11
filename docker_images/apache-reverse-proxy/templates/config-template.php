@@ -8,7 +8,7 @@
 	
 	<Proxy "balancer://dynamicCluster">
 		<?php
-			foreach($staticApp as $ip) {
+			foreach($dynamicApp as $ip) {
 				print "BalancerMember 'http://$ip'\r\n";
 			}
 		?>
@@ -18,24 +18,20 @@
 		<?php
 			$i =  0;
 			foreach($staticApp as $ip) {
-				print "BalancerMember 'http://$ip' route=$i\r\n";
+				print "BalancerMember 'http://$ip/' route=$i\r\n";
 				$i++;
 			}
 		?>
-		ProxySet stickysession=ROUTEID
+		 ProxySet stickysession=ROUTEID
 	</Proxy>
 
-	ProxyPass "/api/animals/" "balancer://dynamicCluster"
-	ProxyPassReverse "/api/animals/" "balancer://dynamicCluster"
+	ProxyPass "/api/animals/" "balancer://dynamicCluster/"
+	ProxyPassReverse "/api/animals/" "balancer://dynamicCluster/"
 
 	Header add Set-Cookie "ROUTEID=.%{BALANCER_WORKER_ROUTE}e; path=/" env=BALANCER_ROUTE_CHANGED
-	ProxyPass "/" "balancer://staticCluster"
-	ProxyPassReverse "/" "balancer://staticCluster"
+	ProxyPass "/" "balancer://staticCluster/" 
+	ProxyPassReverse "/" "balancer://staticCluster/"
 
-	<Location "/balancer-manager">
-		SetHandler balancer-manager
-		Require host demo.res.ch
-	</Location>
 
 
 </VirtualHost>

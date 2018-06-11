@@ -85,6 +85,7 @@
 
             <div class="col-six tab-full left footer-desc">
 
+                Serveur IP : <?php echo $_SERVER['SERVER_ADDR']; ?> <br/>
                 Proin eget tortor risus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla porttitor accumsan tincidunt. Nulla porttitor accumsan tincidunt. Quaerat voluptas autem necessitatibus vitae aut.
 
             </div>
@@ -141,7 +142,7 @@
                         <div class="pswp__preloader__icn">
                             <div class="pswp__preloader__cut">
                                 <div class="pswp__preloader__donut"></div>
-                            </div>
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -180,7 +181,6 @@
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
     <script src="js/animals.js"></script>
-
 </body>
 
 </html>
