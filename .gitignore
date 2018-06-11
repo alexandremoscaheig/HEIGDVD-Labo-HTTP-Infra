@@ -1,0 +1,2 @@
+docker_images/express-image/src/node_modules
+docker_images/express-image/src/node_modules/*
